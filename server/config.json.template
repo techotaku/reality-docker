@@ -6,7 +6,7 @@
   },
   "api": {
     "tag": "api",
-    "services": [ "HandlerService", "StatsService" ]
+    "services": [ "StatsService" ]
   },
   "dns": {},
   "stats": {},
@@ -24,12 +24,22 @@
       },
       {
         "type": "field",
-        "outboundTag": "block",
+{{^REALITY_SEND_THRU_CN}}
+       "outboundTag": "block",
+{{/REALITY_SEND_THRU_CN}}
+{{#REALITY_SEND_THRU_CN}}
+       "outboundTag": "cn",
+{{/REALITY_SEND_THRU_CN}} 
         "domain": [ "geosite:cn" ]
       },
       {
         "type": "field",
-        "outboundTag": "block",
+{{^REALITY_SEND_THRU_CN}}
+       "outboundTag": "block",
+{{/REALITY_SEND_THRU_CN}}
+{{#REALITY_SEND_THRU_CN}}
+       "outboundTag": "cn",
+{{/REALITY_SEND_THRU_CN}}
         "ip": [ "geoip:cn" ]
       }
     ]
@@ -88,9 +98,20 @@
   "outbounds": [
     {
       "protocol": "freedom",
+{{#REALITY_SEND_THRU_DEF}}
+      "sendThrough": "{{REALITY_SEND_THRU_DEF}}",
+{{/REALITY_SEND_THRU_DEF}}
       "settings": {}
     },
+{{#REALITY_SEND_THRU_CN}}
     {
+      "protocol": "freedom",
+      "sendThrough": "{{REALITY_SEND_THRU_CN}}",
+      "settings": {},
+      "tag": "cn"
+    },
+{{/REALITY_SEND_THRU_CN}}
+   {
       "protocol": "blackhole",
       "settings": {},
       "tag": "block"
