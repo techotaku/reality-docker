@@ -24,22 +24,22 @@
       },
       {
         "type": "field",
-{{^REALITY_SEND_THRU_CN}}
+{{^REALITY_CN_WARP_PRIV}}
        "outboundTag": "block",
-{{/REALITY_SEND_THRU_CN}}
-{{#REALITY_SEND_THRU_CN}}
+{{/REALITY_CN_WARP_PRIV}}
+{{#REALITY_CN_WARP_PRIV}}
        "outboundTag": "cn",
-{{/REALITY_SEND_THRU_CN}} 
+{{/REALITY_CN_WARP_PRIV}} 
         "domain": [ "geosite:cn" ]
       },
       {
         "type": "field",
-{{^REALITY_SEND_THRU_CN}}
+{{^REALITY_CN_WARP_PRIV}}
        "outboundTag": "block",
-{{/REALITY_SEND_THRU_CN}}
-{{#REALITY_SEND_THRU_CN}}
+{{/REALITY_CN_WARP_PRIV}}
+{{#REALITY_CN_WARP_PRIV}}
        "outboundTag": "cn",
-{{/REALITY_SEND_THRU_CN}}
+{{/REALITY_CN_WARP_PRIV}}
         "ip": [ "geoip:cn" ]
       }
     ]
@@ -98,19 +98,29 @@
   "outbounds": [
     {
       "protocol": "freedom",
-{{#REALITY_SEND_THRU_DEF}}
-      "sendThrough": "{{REALITY_SEND_THRU_DEF}}",
-{{/REALITY_SEND_THRU_DEF}}
       "settings": {}
     },
-{{#REALITY_SEND_THRU_CN}}
+{{#REALITY_CN_WARP_PRIV}}
     {
-      "protocol": "freedom",
-      "sendThrough": "{{REALITY_SEND_THRU_CN}}",
-      "settings": {},
+      "protocol": "wireguard",
+      "settings": {
+        "secretKey": "{{REALITY_CN_WARP_PRIV}}",
+        "address": [
+          "{{REALITY_CN_WARP_IPV4}}",
+          "{{REALITY_CN_WARP_IPV6}}"
+        ],
+        "peers": [
+          {
+            "publicKey": "{{REALITY_CN_WARP_PUB}}",
+            "endpoint": "engage.cloudflareclient.com:2408"
+          }
+        ],
+        "domainStrategy": "ForceIPv4",
+        "mtu": 1280
+      },
       "tag": "cn"
     },
-{{/REALITY_SEND_THRU_CN}}
+{{/REALITY_CN_WARP_PRIV}}
    {
       "protocol": "blackhole",
       "settings": {},
