@@ -3,7 +3,7 @@ FROM alpine
 LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
 RUN apk add --no-cache bash curl nano ca-certificates tzdata && \
-    curl -sSL https://github.com/XTLS/Xray-core/releases/download/v25.6.8/Xray-linux-64.zip -o /tmp/xray.zip && \
+    curl -sSL https://github.com/XTLS/Xray-core/releases/download/v25.9.11/Xray-linux-64.zip -o /tmp/xray.zip && \
     mkdir -p /tmp/xray && \
     unzip /tmp/xray.zip -d /tmp/xray/ && \
     mv /tmp/xray/xray /usr/local/bin/xray && \
