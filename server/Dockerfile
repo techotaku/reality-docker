@@ -3,7 +3,7 @@ FROM alpine
 LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
 RUN apk add --no-cache bash curl nano ca-certificates tzdata && \
-    curl -sSL https://github.com/XTLS/Xray-core/releases/download/v25.9.11/Xray-linux-64.zip -o /tmp/xray.zip && \
+    curl -sSL https://github.com/XTLS/Xray-core/releases/download/v25.12.2/Xray-linux-64.zip -o /tmp/xray.zip && \
     mkdir -p /tmp/xray && \
     unzip /tmp/xray.zip -d /tmp/xray/ && \
     mv /tmp/xray/xray /usr/local/bin/xray && \
@@ -14,7 +14,7 @@ RUN apk add --no-cache bash curl nano ca-certificates tzdata && \
     curl -O https://raw.githubusercontent.com/tests-always-included/mo/master/mo && \
     mv mo /usr/local/bin && \
     chmod +x /usr/local/bin/mo && \
-    curl -sSL https://github.com/hjson/hjson-go/releases/download/v4.4.0/hjson_v4.4.0_linux_amd64.tar.gz | tar -xz -C /usr/local/bin && \
+    curl -sSL https://github.com/hjson/hjson-go/releases/download/v4.5.0/hjson_v4.5.0_linux_amd64.tar.gz | tar -xz -C /usr/local/bin && \
     mkdir -p /etc/xray/ && \
     curl -sSL https://github.com/techotaku/reality-docker/raw/main/server/config.json.template -o /etc/xray/config.json.template && \
     curl -sSL https://github.com/techotaku/reality-docker/raw/main/server/configure-and-run.sh -o /root/configure-and-run.sh && \
