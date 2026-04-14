@@ -24,6 +24,11 @@
       },
       {
         "type": "field",
+        "outboundTag": "freedom",
+        "domain": [ "geosite:google" ]
+      },
+      {
+        "type": "field",
 {{^REALITY_CN_WARP_PRIV}}
        "outboundTag": "block",
 {{/REALITY_CN_WARP_PRIV}}
@@ -55,7 +60,7 @@
   "inbounds": [
     {
       "listen": "0.0.0.0",
-      "port": 8443,
+      "port": 443,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -80,6 +85,23 @@
 {{/REALITY_DOMAINS}}
           ],
           "privateKey": "{{REALITY_PRIV_KEY}}",
+{{#REALITY_MLDSA65SEED}}
+          "mldsa65Seed": "{{REALITY_MLDSA65SEED}}",
+{{/REALITY_MLDSA65SEED}}
+{{#REALITY_LIMIT_UPLOAD}}
+          "limitFallbackUpload": {
+            "afterBytes": {{REALITY_LIMIT_UPLOAD}},
+            "bytesPerSec": {{REALITY_LIMIT_UPLOAD}},
+            "burstBytesPerSec": {{REALITY_LIMIT_UPLOAD}}
+          },
+{{/REALITY_LIMIT_UPLOAD}}
+{{#REALITY_LIMIT_DOWNLOAD}}
+          "limitFallbackDownload": {
+            "afterBytes": {{REALITY_LIMIT_DOWNLOAD}},
+            "bytesPerSec": {{REALITY_LIMIT_DOWNLOAD}},
+            "burstBytesPerSec": {{REALITY_LIMIT_DOWNLOAD}}
+          },
+{{/REALITY_LIMIT_DOWNLOAD}}
           "shortIds": [
 {{#REALITY_SHORT_IDS}}
             "{{.}}",
@@ -98,7 +120,8 @@
   "outbounds": [
     {
       "protocol": "freedom",
-      "settings": {}
+      "settings": {},
+      "tag": "freedom"
     },
 {{#REALITY_CN_WARP_PRIV}}
     {
@@ -106,12 +129,22 @@
       "settings": {
         "secretKey": "{{REALITY_CN_WARP_PRIV}}",
         "address": [
+{{^REALITY_CN_WARP_IPV4}}
+          "172.16.0.2/32",
+{{/REALITY_CN_WARP_IPV4}}
+{{#REALITY_CN_WARP_IPV4}}
           "{{REALITY_CN_WARP_IPV4}}",
+{{/REALITY_CN_WARP_IPV4}}
           "{{REALITY_CN_WARP_IPV6}}"
         ],
         "peers": [
           {
+{{^REALITY_CN_WARP_PUB}}
+            "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+{{/REALITY_CN_WARP_PUB}}
+{{#REALITY_CN_WARP_PUB}}
             "publicKey": "{{REALITY_CN_WARP_PUB}}",
+{{/REALITY_CN_WARP_PUB}}
             "endpoint": "engage.cloudflareclient.com:2408"
           }
         ],
