@@ -85,6 +85,23 @@
 {{/REALITY_DOMAINS}}
           ],
           "privateKey": "{{REALITY_PRIV_KEY}}",
+{{#REALITY_MLDSA65SEED}}
+          "mldsa65Seed": "{{REALITY_MLDSA65SEED}}",
+{{/REALITY_MLDSA65SEED}}
+{{#REALITY_LIMIT_UPLOAD}}
+          "limitFallbackUpload": {
+            "afterBytes": {{REALITY_LIMIT_UPLOAD}},
+            "bytesPerSec": {{REALITY_LIMIT_UPLOAD}},
+            "burstBytesPerSec": {{REALITY_LIMIT_UPLOAD}}
+          },
+{{/REALITY_LIMIT_UPLOAD}}
+{{#REALITY_LIMIT_DOWNLOAD}}
+          "limitFallbackDownload": {
+            "afterBytes": {{REALITY_LIMIT_DOWNLOAD}},
+            "bytesPerSec": {{REALITY_LIMIT_DOWNLOAD}},
+            "burstBytesPerSec": {{REALITY_LIMIT_DOWNLOAD}}
+          },
+{{/REALITY_LIMIT_DOWNLOAD}}
           "shortIds": [
 {{#REALITY_SHORT_IDS}}
             "{{.}}",
